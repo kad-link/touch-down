@@ -8,10 +8,13 @@ export default {
   theme: {
     extend: {
       colors: {
-        'dark-bg': '#0D0D1A',
-        'dark-card': '#111827',
+        'dark-bg': '#08060D',
+        'dark-card': '#0B0814',
         'luxury-text': '#F1F1EE',
-        'electric-blue': '#0066FF'
+        'luxury-violet': '#5B21B6',
+        'luxury-indigo': '#3730A3',
+        'luxury-lavender': '#8B5CF6',
+        'electric-blue': '#5B21B6',
       },
       fontFamily: {
         sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
@@ -21,4 +24,3 @@ export default {
   },
   plugins: [],
 }
-

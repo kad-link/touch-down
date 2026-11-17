@@ -8,9 +8,13 @@ export function TransitionProvider({ children }) {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Scroll to top on route change
+  // Reset scroll to top on route change using Lenis or native
   useEffect(() => {
-    window.scrollTo(0, 0);
+    if (window.lenis) {
+      window.lenis.scrollTo(0, { immediate: true });
+    } else {
+      window.scrollTo(0, 0);
+    }
   }, [location.pathname]);
 
   const morphNavigate = (to) => {
@@ -30,8 +34,8 @@ export function TransitionProvider({ children }) {
       <div className={`page-transition-overlay ${isTransitioning ? 'active' : ''}`}>
         <div className="flex flex-col items-center gap-6">
           <div className="square-morph"></div>
-          <div className="font-display text-xs font-bold tracking-[0.3em] uppercase text-[#F1F1EE] flex items-center gap-2">
-            TOUCHDOWN <span className="w-1.5 h-1.5 rounded-full bg-[#0066FF] animate-pulse"></span>
+          <div className="font-display text-xs font-bold tracking-[0.3em] uppercase text-[#F1F1EE] flex items-center justify-center">
+            TOUCHDOWN
           </div>
         </div>
       </div>
@@ -46,4 +50,3 @@ export function useMorphNavigate() {
   }
   return context.morphNavigate;
 }
-
