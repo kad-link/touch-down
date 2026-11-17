@@ -14,7 +14,7 @@ vistara/
 ├── client/                  # Frontend Web Application (React.js + Vite)
 │   ├── package.json         # React 18, React Router v6, Lenis, Lucide React, Tailwind
 │   ├── vite.config.js       # Vite build & dev server configuration
-│   ├── tailwind.config.js   # Dark luxury theme colors (#0D0D1A, #111827, #0066FF)
+│   ├── tailwind.config.js   # Dark luxury obsidian & royal violet palette (#08060D, #0F0C18, #7C3AED, #6366F1)
 │   ├── index.html           # HTML entry point with Inter & Plus Jakarta Sans fonts
 │   │
 │   ├── src/
