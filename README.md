@@ -8,76 +8,75 @@ Touchdown is an executive ground mobility platform engineered to eliminate post-
 
 ```
 vistara/
-├── .gitignore         # Version control exclusion rules
-├── README.md          # Project & architecture overview
+├── .gitignore               # Version control exclusion rules
+├── README.md                # Project & architecture overview
 │
-├── client/            # Frontend Web Application (Dark Luxury SaaS)
-│   ├── index.html     # Landing page (capabilities, pricing intelligence, fleet)
-│   ├── login.html     # Sign-in portal with persona toggling
-│   ├── register.html  # Private membership onboarding portal
-│   ├── css/
-│   │   └── style.css  # Dark luxury design tokens, Square Morph keyframes, Lenis resets
-│   └── js/
-│       ├── main.js    # Lenis smooth scroll, GSAP ScrollTrigger ticker & savings calculator
-│       └── transition.js # Square Morph page transition engine
+├── client/                  # Frontend Web Application (React.js + Vite)
+│   ├── package.json         # React 18, React Router v6, Lenis, Lucide React, Tailwind
+│   ├── vite.config.js       # Vite build & dev server configuration
+│   ├── tailwind.config.js   # Dark luxury theme colors (#0D0D1A, #111827, #0066FF)
+│   ├── index.html           # HTML entry point with Inter & Plus Jakarta Sans fonts
+│   │
+│   ├── src/
+│   │   ├── main.jsx         # React root mounting BrowserRouter
+│   │   ├── App.jsx          # App router (/, /login, /register) & Lenis hook
+│   │   ├── index.css        # Dark luxury design tokens, Square Morph keyframes, Lenis CSS
+│   │   │
+│   │   ├── hooks/
+│   │   │   └── useLenis.js  # Smooth scrolling hook with RAF loop & ScrollTrigger ticker
+│   │   │
+│   │   ├── components/
+│   │   │   ├── SquareMorphTransition.jsx # Page transition manager with morphing square loader
+│   │   │   ├── Navbar.jsx   # Glassmorphic navigation header
+│   │   │   ├── Hero.jsx     # Dark luxury hero with 20% soft purple radial glow
+│   │   │   ├── Capabilities.jsx # 6 core engineering capabilities + registration banner
+│   │   │   ├── Protocol.jsx # 4-step post-flight executive protocol
+│   │   │   ├── CostCalculator.jsx # Dynamic React distance slider (solo vs. pool savings)
+│   │   │   ├── FleetStandards.jsx # Executive sedan specs (max 3 pax, max 3 bags)
+│   │   │   ├── AirportHubs.jsx # Active metro hubs (BLR, DEL, BOM, SFO)
+│   │   │   ├── CTASection.jsx # Final membership CTA prompt
+│   │   │   └── Footer.jsx   # Executive luxury footer with status indicators
+│   │   │
+│   │   └── pages/
+│   │       ├── LandingPage.jsx   # Composes all landing sections
+│   │       ├── LoginPage.jsx     # Dark luxury login with Commuter / Chauffeur switcher
+│   │       └── RegisterPage.jsx  # Private membership registration portal
+│   │
+│   └── dist/                # Production build artifacts
 │
-└── server/            # Backend API & Matching Engine (Python / FastAPI)
-    ├── main.py        # REST endpoints and static client mounting
-    ├── config.py      # Airport hubs, Sedan fleet limits & chauffeurs
-    ├── models.py      # Pydantic schemas (Commuter, DriverInfo, PooledTrip)
-    ├── requirements.txt # Backend dependencies
-    ├── services/
-    │   ├── matcher.py # Greedy Sedan corridor matching engine
-    │   ├── routing.py # OpenStreetMap / OSRM matrix & polyline service
-    │   └── pricing.py # Detour-compensated fare & rebate calculator
-    └── tests/
-        └── test_server.py # Backend unit and endpoint tests
+└── server/                  # Backend API & Matching Engine (Python / FastAPI)
+    ├── main.py              # REST API & static React build asset server
+    ├── config.py            # Airport hubs, Sedan specifications & chauffeur data
+    ├── models.py            # Pydantic data schemas
+    ├── requirements.txt     # Backend dependencies
+    └── services/
+        ├── matcher.py       # Single-origin corridor matching engine
+        ├── routing.py       # OpenStreetMap / OSRM matrix & geometry service
+        └── pricing.py       # Detour-compensated fare & rebate calculator
 ```
 
 ---
 
-## 🎨 Dark Luxury Design System (Client)
+## 🚀 Running the React Client
 
-| Element | Specification |
-| :--- | :--- |
-| **Theme** | Dark Mode / Dark Luxury SaaS |
-| **Primary Background** | `#0D0D1A` (deep dark blue-black) |
-| **Card Background** | `#111827` with 1px border at `rgba(255, 255, 255, 0.08)` |
-| **Primary Typography** | `#F1F1EE` (clean sans-serif: `Inter` & `Plus Jakarta Sans`) |
-| **Accent Color** | Electric Blue `#0066FF` for CTA buttons & highlighted text |
-| **Hero Atmosphere** | Subtle radial gradient: soft purple glow at 20% opacity (`rgba(139, 92, 246, 0.20)`) centered behind hero text |
-| **Primary CTA Button** | Electric Blue `#0066FF`, white text, `box-shadow: 0 0 30px rgba(0, 102, 255, 0.4)` |
-| **Smooth Scrolling** | [Lenis v1.1.13](https://unpkg.com/lenis@1.1.13/dist/lenis.min.js) with smooth requestAnimationFrame loop |
-| **Page Transitions** | Geometric **Square Morph** loading animation between all page transitions |
-
----
-
-## ⚡ Core Tasks & Platform Capabilities
-
-1. **Radial Highway Conflation:** Mathematically groups terminal deboardings along natural arterial corridors with monotonic near-to-far ordering.
-2. **Detour-Compensated Fair Pricing:** Baseline 25% discount for first drop-offs; up to 45% rebate for downstream passengers enduring minor detour minutes.
-3. **Trunk-First Luggage Allocation:** Strictly enforces a 3-passenger and 3-check-in-bag cap on executive sedans.
-4. **OpenStreetMap Routing Topology:** Sub-second duration matrices and turn-by-turn road geometries avoiding dead-ends and U-turns.
-5. **Dual Persona Digital Manifest:** Executive Commuter Boarding Pass with terminal pickup pillars alongside Chauffeur turn-by-turn route sheets.
-6. **Carbon Wastage Avoidance:** Collapses 3 individual airport taxi trips into 1 shared executive sedan, cutting urban airport commute emissions by 38%.
-
----
-
-## 🚀 Running the Project
-
-### Option A: Static Frontend Preview (Client Only)
+### Development Server (Hot Reload)
 ```bash
 cd client
-python3 -m http.server 8080
+npm install
+npm run dev
 ```
-Then visit [http://localhost:8080](http://localhost:8080).
+Runs at [http://localhost:3000](http://localhost:3000).
 
-### Option B: Full-Stack Backend + Client (Server)
+### Production Build
 ```bash
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r server/requirements.txt
-uvicorn server.main:app --reload --port 8000
+cd client
+npm run build
 ```
-- **Web App:** [http://localhost:8000](http://localhost:8000)
-- **API Docs (Swagger):** [http://localhost:8000/docs](http://localhost:8000/docs)
+Creates optimized static bundles in `client/dist/`.
+
+### Preview Production Build
+```bash
+cd client
+npm run preview
+```
+Runs at [http://localhost:4173](http://localhost:4173).
